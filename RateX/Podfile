@@ -1,0 +1,15 @@
+platform :ios, '9.0'
+use_frameworks!
+
+def shared_pods
+    
+    pod 'Alamofire'
+    pod 'TPKeyboardAvoiding'
+    
+end
+
+target "RateX" do
+    
+    shared_pods
+    
+end

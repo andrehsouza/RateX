@@ -15,6 +15,7 @@
 		30A12F4320FC2A2200135A64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30A12F4120FC2A2200135A64 /* LaunchScreen.storyboard */; };
 		30A12F4E20FC2A2200135A64 /* RateXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A12F4D20FC2A2200135A64 /* RateXTests.swift */; };
 		30A12F5920FC2A2300135A64 /* RateXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A12F5820FC2A2300135A64 /* RateXUITests.swift */; };
+		7C4B3EE0EE98C28A32F81C9E /* Pods_RateX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8EC2FFFBFFAB6B159E7306D /* Pods_RateX.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		046B342236B30113065B0DE5 /* Pods-RateX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RateX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RateX/Pods-RateX.debug.xcconfig"; sourceTree = "<group>"; };
 		30A12F3220FC2A1B00135A64 /* RateX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RateX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A12F3520FC2A1B00135A64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30A12F3720FC2A1B00135A64 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +51,8 @@
 		30A12F5420FC2A2200135A64 /* RateXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RateXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A12F5820FC2A2300135A64 /* RateXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateXUITests.swift; sourceTree = "<group>"; };
 		30A12F5A20FC2A2300135A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AEEA9B52A3D8B85E1F139581 /* Pods-RateX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RateX.release.xcconfig"; path = "Pods/Target Support Files/Pods-RateX/Pods-RateX.release.xcconfig"; sourceTree = "<group>"; };
+		D8EC2FFFBFFAB6B159E7306D /* Pods_RateX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RateX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C4B3EE0EE98C28A32F81C9E /* Pods_RateX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BB089FAD167C69ED96FD25D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8EC2FFFBFFAB6B159E7306D /* Pods_RateX.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		30A12F2920FC2A1A00135A64 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +96,8 @@
 				30A12F4C20FC2A2200135A64 /* RateXTests */,
 				30A12F5720FC2A2200135A64 /* RateXUITests */,
 				30A12F3320FC2A1B00135A64 /* Products */,
+				BE21E3D9667F14DBA09E4515 /* Pods */,
+				1BB089FAD167C69ED96FD25D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +143,15 @@
 			path = RateXUITests;
 			sourceTree = "<group>";
 		};
+		BE21E3D9667F14DBA09E4515 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				046B342236B30113065B0DE5 /* Pods-RateX.debug.xcconfig */,
+				AEEA9B52A3D8B85E1F139581 /* Pods-RateX.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +159,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30A12F5D20FC2A2300135A64 /* Build configuration list for PBXNativeTarget "RateX" */;
 			buildPhases = (
+				EC301FAB6659746FDA7F41CE /* [CP] Check Pods Manifest.lock */,
 				30A12F2E20FC2A1B00135A64 /* Sources */,
 				30A12F2F20FC2A1B00135A64 /* Frameworks */,
 				30A12F3020FC2A1B00135A64 /* Resources */,
+				605E36754BF82247178839B1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -253,6 +279,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		605E36754BF82247178839B1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RateX/Pods-RateX-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RateX/Pods-RateX-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC301FAB6659746FDA7F41CE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RateX-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		30A12F2E20FC2A1B00135A64 /* Sources */ = {
@@ -432,6 +499,7 @@
 		};
 		30A12F5E20FC2A2300135A64 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 046B342236B30113065B0DE5 /* Pods-RateX.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -450,6 +518,7 @@
 		};
 		30A12F5F20FC2A2300135A64 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEEA9B52A3D8B85E1F139581 /* Pods-RateX.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
