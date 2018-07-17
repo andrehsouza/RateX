@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum Currency: String, Decodable {
+enum Currency: String, Decodable, Hashable {
     
     //Before swift 4.2, otherwise: CaseIterable
-    static let allCases = [USD, GBP, EUR, JPY, CHF, AUD, CAD, SGD, BRL, PLN]
+    static let allCases = [USD, GBP, EUR, JPY, CHF, AUD, CAD, SGD, BRL, PLN].sorted(by:{ $0.name < $1.name})
     
     case USD
     case GBP
@@ -77,7 +77,7 @@ enum Currency: String, Decodable {
 }
 
 
-extension Currency: CurrencydListItemInterface {
+extension Currency: CurrencyListItemInterface {
     
     var title: String? {
         return "\(self.name) (\(self.symbol))"

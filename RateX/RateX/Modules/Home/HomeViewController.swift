@@ -10,12 +10,12 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: RBaseViewController {
     
     @IBOutlet weak var cardTopView: RCardView!
     @IBOutlet weak var cardBottomView: RCardView!
     
-    @IBOutlet weak var currencyButtonTop: UIButton!
+    @IBOutlet weak var currencyButtonTop: RButton!
     @IBOutlet weak var currencyButtonBottom: UIButton!
     
     @IBOutlet weak var tableViewTop: UITableView!
@@ -27,6 +27,7 @@ final class HomeViewController: UIViewController {
     @IBOutlet weak var textFieldBottom: UITextField!
     
     @IBOutlet weak var rateLabel: UILabel!
+    @IBOutlet weak var updateLabel: UILabel!
     
     // MARK: - Public properties -
 
@@ -36,19 +37,8 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let currencyService = CurrencyRatesService()
-//        currencyService.get(base: .USD, { response in
-//            switch response {
-//            case .success(let currencyrates):
-//                debugPrint("SUCESSO")
-//                break
-//            case .failure(let error):
-//                debugPrint("Erro! \(error)")
-//                break
-//            }
-//        })
-        
+        setupTableViews()
+        presenter.viewDidLoad()
     }
     
     @IBAction func touchDown(_ sender: UIButton) {
@@ -61,22 +51,15 @@ final class HomeViewController: UIViewController {
     
     @IBAction func touchCurrency(_ sender: UIButton) {
         animTouch(sender, scaledDefault: true)
-        
-        UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0,
-                       options: [.curveEaseInOut], animations: {
-                        if sender == self.currencyButtonTop {
-                            self.tableViewTopHeight.constant = (self.tableViewTopHeight.constant > 0) ? 0 : 400
-                            self.tableViewBottomHeight.constant =  0
-                        } else {
-                            self.tableViewBottomHeight.constant = (self.tableViewBottomHeight.constant > 0) ? 0 : 400
-                            self.tableViewTopHeight.constant = 0
-                        }
-                        
-                        self.view.layoutIfNeeded()
-                        
-        }, completion: nil)
-        
-        
+        let location: LayoutLocation = (sender == currencyButtonTop) ? .top : .bottom
+        presenter.didTouchButtonCurrency(location)
+    }
+    
+    @IBAction func editingChanged(_ sender: Any) {
+        if let amountString = textFieldTop.text?.currencyInputFormatting() {
+            textFieldTop.text = amountString
+//            convertValue()
+        }
     }
 	
 }
@@ -110,16 +93,12 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == tableViewTop {
-            return presenter.numberOfItemsTop(in: section)
-        } else {
-            return presenter.numberOfItemsBottom(in: section)
-        }
+        return presenter.numberOfItems(in: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as CurrencyTableViewCell
-//        cell.titleLabel. = presenter.itemTop(at: <#T##IndexPath#>)
+        cell.titleLabel.text = presenter.item(at: indexPath)?.title
         return cell
     }
     
@@ -136,9 +115,9 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if tableView == tableViewTop {
-            presenter.didSelectItemTop(at: indexPath)
+            presenter.didSelectTopItem(at: indexPath)
         } else {
-            presenter.didSelectItemBottom(at: indexPath)
+            presenter.didSelectBottomItem(at: indexPath)
         }
     }
     
@@ -148,8 +127,60 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: HomeViewInterface {
     
+    func showLoading(_ loading: Bool) {
+        if loading {
+            showFenceLoading()
+        } else {
+            hideFenceView()
+        }
+    }
     
+    func showCurrencyButtonTopLoading(_ loading: Bool) {
+        if loading {
+            currencyButtonTop.showLoading()
+        } else {
+            currencyButtonTop.hideLoading()
+        }
+    }
     
-
+    func showError(error: ErrorInterface, target: Any, action: Selector) {
+        showFenceError(error: error, target: target, action: action)
+    }
+    
+    func showSelectedCurrency(_ currency: CurrencyListItemInterface, location: LayoutLocation) {
+        if location == .top {
+            currencyButtonTop.setTitle(currency.title, for: .normal)
+        } else {
+            currencyButtonBottom.setTitle(currency.title, for: .normal)
+        }
+    }
+    
+    func showOrHideTableView(_ location: LayoutLocation) {
+        
+        UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: [.curveEaseInOut], animations: {
+            if location == .top {
+                self.tableViewTopHeight.constant = (self.tableViewTopHeight.constant > 0) ? 0 : 440
+                self.tableViewBottomHeight.constant =  0
+            } else {
+                self.tableViewBottomHeight.constant = (self.tableViewBottomHeight.constant > 0) ? 0 : 440
+                self.tableViewTopHeight.constant = 0
+            }
+            self.view.layoutIfNeeded()
+            
+        }, completion: nil)
+    }
+    
+    func reloadDatas() {
+        tableViewTop.reloadData()
+        tableViewBottom.reloadData()
+    }
+    
+    func setDate(_ date: String) {
+        updateLabel.text = date
+    }
+    
+    func setRate(_ rate: String) {
+        rateLabel.text = rate
+    }
     
 }

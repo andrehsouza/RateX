@@ -12,7 +12,7 @@ struct CurrencyRates: Decodable {
     
     var base: Currency
     var date: String
-    var rates: [Currency: Float] = [:]
+    var rates: [Currency: Double] = [:]
     
     enum CodingKeys: String, CodingKey {
         case base, date, rates
@@ -22,7 +22,7 @@ struct CurrencyRates: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.base = try container.decode(Currency.self, forKey: .base)
         self.date = try container.decode(String.self, forKey: .date)
-        let arrayrates = try container.decode([String:Float].self, forKey: .rates)
+        let arrayrates = try container.decode([String:Double].self, forKey: .rates)
         arrayrates.forEach() {
             if let currency = Currency(rawValue: $0.key) {
                 rates[currency] = $0.value

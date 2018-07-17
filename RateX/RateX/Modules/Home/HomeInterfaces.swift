@@ -10,7 +10,7 @@
 
 import UIKit
 
-enum itemLocation {
+enum LayoutLocation {
     case top
     case bottom
 }
@@ -23,19 +23,30 @@ protocol HomeWireframeInterface: WireframeInterface {
 }
 
 protocol HomeViewInterface: ViewInterface {
+    func showSelectedCurrency(_ currency: CurrencyListItemInterface, location: LayoutLocation)
+    func showOrHideTableView(_ location: LayoutLocation)
+    func showLoading(_ loading: Bool)
+    func showCurrencyButtonTopLoading(_ loading: Bool)
+    func showError(error: ErrorInterface, target: Any, action: Selector)
+    func reloadDatas()
+    func setDate(_ date: String)
+    func setRate(_ rate: String)
 }
 
 protocol HomePresenterInterface: PresenterInterface {
+    func loadCurrencyRates()
     func numberOfSections() -> Int
-    func numberOfItems(in section: Int, in: itemLocation) -> Int
-    func item(at indexPath: IndexPath, in: itemLocation) -> CurrencydListItemInterface?
-    func didSelectItem(at indexPath: IndexPath, in: itemLocation)
+    func numberOfItems(in section: Int) -> Int
+    func item(at indexPath: IndexPath) -> CurrencyListItemInterface?
+    func didSelectTopItem(at indexPath: IndexPath)
+    func didSelectBottomItem(at indexPath: IndexPath)
+    func didTouchButtonCurrency(_ location: LayoutLocation)
 }
 
 protocol HomeInteractorInterface: InteractorInterface {
-    
+    func getCurrencies(base currency: Currency, completion: @escaping (RequestResultType<CurrencyRates>) -> Void)
 }
 
-protocol CurrencydListItemInterface {
+protocol CurrencyListItemInterface {
     var title: String? { get }
 }

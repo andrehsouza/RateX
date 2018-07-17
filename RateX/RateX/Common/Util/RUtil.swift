@@ -17,14 +17,14 @@ enum EndPoints {
     var complement: String {
         switch self {
         case .latest(let currency):
-            let allCurrencies = Currency.allCases.filter({ $0 != currency }).compactMap({ $0.rawValue }).joined(separator: ",")
+            let allCurrencies = Currency.allCases.filter({ $0 != currency }).compactMap({ $0.rawValue }).joined(separator: ",") //.reduce(",", +)
             return "/latest?base=\(currency.rawValue)&symbols=\(allCurrencies)"
         }
     }
 
 }
 
-final class UrlUtil {
+final class RUrl {
 
     static func path(for endPoint: EndPoints) -> String {
         return "\(SERVER_URL)\(endPoint.complement)"

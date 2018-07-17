@@ -18,8 +18,10 @@ final class HomePresenter {
     private var _interactor: HomeInteractorInterface
     private var _wireframe: HomeWireframeInterface
     
-    private var _topCurrencies: [Currency] = Currency.allCases
-    private var _bottomCurrencies: [Currency] = [:]
+    private var _allCurrencies: [Currency] = Currency.allCases
+    private var _selectedTopIndex: Int = -1
+    private var _selectedBottomIndex: Int = -1
+    private var _cache: [CurrencyRates] = []
 
     // MARK: - Lifecycle -
 
@@ -34,5 +36,73 @@ final class HomePresenter {
 
 extension HomePresenter: HomePresenterInterface {
     
+    func loadCurrencyRates() {
+        if let currencyRate = _cache.filter({ $0.base == _allCurrencies[_selectedTopIndex] }).first {
+            _view.setDate(currencyRate.date)
+//            _view.setRate("\(currencyRate.rates[_allCurrencies[_selectedBottomIndex]] ?? 0)")
+        } else {
+            _loadRates()
+        }
+    }
+    
+    func viewDidLoad() {
+        _view.reloadDatas()
+    }
+    
+    func numberOfSections() -> Int {
+        return 1
+    }
+    
+    func numberOfItems(in section: Int) -> Int {
+        return _allCurrencies.count
+    }
+    
+    func item(at indexPath: IndexPath) -> CurrencyListItemInterface? {
+        return _allCurrencies[indexPath.row]
+    }
+    
+    func didSelectTopItem(at indexPath: IndexPath) {
+        _selectedTopIndex = indexPath.row
+        _view.showSelectedCurrency(_allCurrencies[_selectedTopIndex], location: .top)
+        _view.showOrHideTableView(.top)
+        loadCurrencyRates()
+    }
+    
+    func didSelectBottomItem(at indexPath: IndexPath) {
+        _selectedBottomIndex = indexPath.row
+        _view.showSelectedCurrency(_allCurrencies[_selectedBottomIndex], location: .bottom)
+        _view.showOrHideTableView(.bottom)
+    }
+    
+    func didTouchButtonCurrency(_ location: LayoutLocation) {
+        _view.showOrHideTableView(location)
+        
+    }
+    
+}
+
+//MARK: - Functions -
+
+extension HomePresenter {
+    
+    @objc private func _loadRates() {
+        _view.showLoading(true)
+        _interactor.getCurrencies(base: _allCurrencies[_selectedTopIndex], completion: { [weak self] result in
+            self?._handleFeedResult(result)
+        })
+    }
+    
+    private func _handleFeedResult(_ result: RequestResultType<CurrencyRates>) {
+        switch result {
+        case .success(let currencyRates):
+            _view.showLoading(false)
+            _view.reloadDatas()
+            _cache.append(currencyRates)
+            break
+        case .failure(let errorResponse):
+            _view.showError(error: errorResponse, target: self, action: #selector(self._loadRates))
+            break
+        }
+    }
     
 }

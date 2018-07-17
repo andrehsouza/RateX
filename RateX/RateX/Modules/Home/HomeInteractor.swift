@@ -20,7 +20,7 @@ final class HomeInteractor {
 
 extension HomeInteractor: HomeInteractorInterface {
     
-    func getRelated(base: Currency, completion: @escaping (RequestResultType<CurrencyRates>) -> Void) {
+    func getCurrencies(base: Currency, completion: @escaping (RequestResultType<CurrencyRates>) -> Void) {
         currencyService.get(base: base, completion)
     }
     

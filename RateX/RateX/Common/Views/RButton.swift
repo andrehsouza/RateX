@@ -10,8 +10,17 @@ import UIKit
 
 @IBDesignable
 class RButton: UIButton {
+    
+    private var originalButtonText: String?
+    private var activityIndicator: UIActivityIndicatorView!
 
     @IBInspectable var fillColor: UIColor? = UIColor.white {
+        didSet {
+            updateViewsFromIB()
+        }
+    }
+    
+    @IBInspectable var activityColor: UIColor? = UIColor.black {
         didSet {
             updateViewsFromIB()
         }
@@ -93,6 +102,52 @@ extension RButton: BaseViewProtocol {
         } else {
             alpha = 0.4
         }
+    }
+    
+}
+
+//MARK: - Loading -
+
+extension RButton {
+    
+    func showLoading() {
+        originalButtonText = titleLabel?.text
+        setTitle("", for: .normal)
+        
+        if (activityIndicator == nil) {
+            activityIndicator = createActivityIndicator()
+        }
+        
+        showSpinning()
+        isUserInteractionEnabled = false
+    }
+    
+    func hideLoading() {
+        setTitle(originalButtonText, for: .normal)
+        activityIndicator.stopAnimating()
+        isUserInteractionEnabled = true
+    }
+    
+    private func createActivityIndicator() -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = activityColor
+        return activityIndicator
+    }
+    
+    private func showSpinning() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(activityIndicator)
+        centerActivityIndicatorInButton()
+        activityIndicator.startAnimating()
+    }
+    
+    private func centerActivityIndicatorInButton() {
+        let xCenterConstraint = NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: activityIndicator, attribute: .centerX, multiplier: 1, constant: 0)
+        addConstraint(xCenterConstraint)
+        
+        let yCenterConstraint = NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: activityIndicator, attribute: .centerY, multiplier: 1, constant: 0)
+        addConstraint(yCenterConstraint)
     }
     
 }
