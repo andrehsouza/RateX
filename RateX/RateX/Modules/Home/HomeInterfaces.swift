@@ -28,9 +28,11 @@ protocol HomeViewInterface: ViewInterface {
     func showLoading(_ loading: Bool)
     func showError(error: ErrorInterface, target: Any, action: Selector)
     func reloadDatas()
-    func setDate(_ date: String)
-    func setRate(_ rate: String)
     func enableCurrencyButtonBottom()
+    var topTextFieldText: String? { get set }
+    var bottomTextFieldText: String? { get set }
+    var date: String { get set }
+    var rate: String { get set }
 }
 
 protocol HomePresenterInterface: PresenterInterface {
@@ -41,6 +43,7 @@ protocol HomePresenterInterface: PresenterInterface {
     func didSelectTopItem(at indexPath: IndexPath)
     func didSelectBottomItem(at indexPath: IndexPath)
     func didTouchButtonCurrency(_ location: LayoutLocation)
+    func editingChanged(_ text: String?)
 }
 
 protocol HomeInteractorInterface: InteractorInterface {

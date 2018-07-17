@@ -16,6 +16,7 @@
 		30A12F4020FC2A2200135A64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30A12F3F20FC2A2200135A64 /* Assets.xcassets */; };
 		30A12F4E20FC2A2200135A64 /* RateXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A12F4D20FC2A2200135A64 /* RateXTests.swift */; };
 		30A12F5920FC2A2300135A64 /* RateXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A12F5820FC2A2300135A64 /* RateXUITests.swift */; };
+		7B1DAFC120FE910500BF5CAF /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DAFC020FE910500BF5CAF /* Array+Extension.swift */; };
 		7B53A7A320FE599700EF1D9D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B53A7A220FE599700EF1D9D /* String+Extension.swift */; };
 		7B53A7A520FE5ABB00EF1D9D /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B53A7A420FE5ABB00EF1D9D /* Double+Extension.swift */; };
 		7B622C5320FCD9B9006C0BBE /* Initializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B622C5120FCD9B9006C0BBE /* Initializable.swift */; };
@@ -91,6 +92,7 @@
 		30A12F5420FC2A2200135A64 /* RateXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RateXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A12F5820FC2A2300135A64 /* RateXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateXUITests.swift; sourceTree = "<group>"; };
 		30A12F5A20FC2A2300135A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B1DAFC020FE910500BF5CAF /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		7B53A7A220FE599700EF1D9D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		7B53A7A420FE5ABB00EF1D9D /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		7B622C5120FCD9B9006C0BBE /* Initializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Initializable.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				3064C9E320FDA4F5005A1CFE /* UITableViewCell+Extension.swift */,
 				7B53A7A220FE599700EF1D9D /* String+Extension.swift */,
 				7B53A7A420FE5ABB00EF1D9D /* Double+Extension.swift */,
+				7B1DAFC020FE910500BF5CAF /* Array+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				7B622C9B20FCDA1C006C0BBE /* RImageView.swift in Sources */,
 				7BD6BBFB20FD0C31003A393E /* HomeViewController.swift in Sources */,
 				7B622C9120FCDA1C006C0BBE /* ErrorResponse.swift in Sources */,
+				7B1DAFC120FE910500BF5CAF /* Array+Extension.swift in Sources */,
 				7B622C9320FCDA1C006C0BBE /* BaseWireframe.swift in Sources */,
 				7B622CA020FCDA1C006C0BBE /* RFenceView.swift in Sources */,
 				7B622C5420FCD9B9006C0BBE /* ThemeInitializer.swift in Sources */,

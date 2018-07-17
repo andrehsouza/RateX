@@ -42,12 +42,13 @@ extension HomePresenter: HomePresenterInterface {
     
     func showCurrencyRatesInfo() {
         if let currencyRate = _cache.filter({ $0.base == _allCurrencies[_selectedTopIndex] }).first {
-            _view.setDate("Last update: \(currencyRate.date)")
+            _view.date = "Last update: \(currencyRate.date)"
             //Already selected
             if _selectedBottomIndex > -1 {
                 let bottomCurrency = _allCurrencies[_selectedBottomIndex]
-                _view.setRate("\(currencyRate.base.symbol)1 = \(bottomCurrency.symbol)\(currencyRate.rates[bottomCurrency] ?? 0)")
+                _view.rate = "\(currencyRate.base.symbol) 1 = \(bottomCurrency.symbol) \(currencyRate.rates[bottomCurrency] ?? 0)"
             }
+            convertValue()
         }
     }
     
@@ -64,6 +65,10 @@ extension HomePresenter: HomePresenterInterface {
     }
     
     func didSelectTopItem(at indexPath: IndexPath) {
+        if indexPath.row == _selectedBottomIndex {
+            _selectedBottomIndex = -1
+            clearInfo()
+        }
         _view.enableCurrencyButtonBottom()
         _selectedTopIndex = indexPath.row
         _view.showSelectedCurrency(_allCurrencies[_selectedTopIndex], location: .top)
@@ -90,11 +95,43 @@ extension HomePresenter: HomePresenterInterface {
         _view.showOrHideTableView(location)
     }
     
+    func editingChanged(_ text: String?) {
+        if _selectedTopIndex > -1 {
+            guard let text = text else { return }
+            _view.bottomTextFieldText = ""
+            _view.topTextFieldText = text.currencyInputFormatting()
+            convertValue()
+        } else {
+            _view.topTextFieldText = "0,00"
+            _wireframe.showAlert(with: "Attention", message: "You must select the currencies.")
+        }
+    }
+    
 }
 
 //MARK: - Functions -
 
 extension HomePresenter {
+    
+    private func clearInfo() {
+        _view.bottomTextFieldText = "0,00"
+        _view.date = ""
+        _view.rate = ""
+    }
+    
+    private func convertValue() {
+        
+        guard
+            let topCurrency = _allCurrencies[safe: _selectedTopIndex],
+            let bottomCurrency = _allCurrencies[safe: _selectedBottomIndex],
+            let currencyRate = _cache.filter({ $0.base == topCurrency }).first?.rates[bottomCurrency],
+            let valueToConvertString = _view.topTextFieldText,
+            let valueToConvertDouble = valueToConvertString.toDouble()
+        else { return }
+        
+        let valueConverted = currencyRate * valueToConvertDouble
+        _view.bottomTextFieldText = "\(valueConverted.decimalFormat())"
+    }
     
     @objc private func _loadRates() {
         _view.showLoading(true)
@@ -109,6 +146,7 @@ extension HomePresenter {
             _view.showLoading(false)
             _view.reloadDatas()
             _cache.append(currencyRates)
+            showCurrencyRatesInfo()
             break
         case .failure(let errorResponse):
             _view.showError(error: errorResponse, target: self, action: #selector(self._loadRates))

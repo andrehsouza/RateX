@@ -56,10 +56,7 @@ final class HomeViewController: RBaseViewController {
     }
     
     @IBAction func editingChanged(_ sender: Any) {
-        if let amountString = textFieldTop.text?.currencyInputFormatting() {
-            textFieldTop.text = amountString
-//            convertValue()
-        }
+        presenter.editingChanged(textFieldTop.text)
     }
 	
 }
@@ -127,6 +124,42 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: HomeViewInterface {
     
+    var date: String {
+        get {
+            return updateLabel.text ?? ""
+        }
+        set {
+            updateLabel.text = newValue
+        }
+    }
+    
+    var rate: String {
+        get {
+            return rateLabel.text ?? ""
+        }
+        set {
+            rateLabel.text = newValue
+        }
+    }
+    
+    var topTextFieldText: String? {
+        get {
+            return textFieldTop.text
+        }
+        set {
+            textFieldTop.text = newValue
+        }
+    }
+    
+    var bottomTextFieldText: String? {
+        get {
+            return textFieldBottom.text
+        }
+        set {
+            textFieldBottom.text = newValue
+        }
+    }
+    
     func showLoading(_ loading: Bool) {
         if loading {
             showFenceLoading()
@@ -165,14 +198,6 @@ extension HomeViewController: HomeViewInterface {
     func reloadDatas() {
         tableViewTop.reloadData()
         tableViewBottom.reloadData()
-    }
-    
-    func setDate(_ date: String) {
-        updateLabel.text = date
-    }
-    
-    func setRate(_ rate: String) {
-        rateLabel.text = rate
     }
     
     func enableCurrencyButtonBottom() {

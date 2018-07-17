@@ -10,14 +10,11 @@ import UIKit
 
 class ThemeInitializer: Initializable {
     
-//    lazy var titleFont = UIFont(name: "Optima-Bold", size: 30)!
-    
     func performInitialization() {
         UINavigationBar.appearance().tintColor = .black
         UINavigationBar.appearance().barTintColor = .mainColor
-        UINavigationBar.appearance().prefersLargeTitles = true
-        let titleArr: [NSAttributedStringKey : Any] = [.foregroundColor: UIColor.black]//,
-                                                      // .font: titleFont]
+        UINavigationBar.appearance().prefersLargeTitles = false
+        let titleArr: [NSAttributedStringKey : Any] = [.foregroundColor: UIColor.black]
         UINavigationBar.appearance().titleTextAttributes = titleArr
         UINavigationBar.appearance().largeTitleTextAttributes = titleArr
     }

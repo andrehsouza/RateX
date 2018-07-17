@@ -11,15 +11,17 @@ import Foundation
 extension Double {
     
     func decimalFormat() -> String {
-        let format = NumberFormatter()
-        format.numberStyle = .decimal
-        format.minimumFractionDigits = 2
-        format.maximumFractionDigits = 2
-        format.locale = Locale(identifier: "pt_BR")
-        if let doubleFormatted = format.string(from: self as NSNumber) {
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.numberStyle = .currency
+        currencyFormatter.currencySymbol = ""
+        currencyFormatter.maximumFractionDigits = 2
+        currencyFormatter.minimumFractionDigits = 2
+        currencyFormatter.locale = Locale(identifier: "pt_BR")
+        if let doubleFormatted = currencyFormatter.string(from: self as NSNumber) {
             return doubleFormatted
         }
-        return ""
+        return "0,00"
     }
     
 }

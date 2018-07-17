@@ -11,31 +11,29 @@ import Foundation
 extension String {
     
     func toDouble() -> Double? {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.locale = Locale(identifier: "pt_BR")
-        formatter.maximumFractionDigits = 2
-        formatter.minimumFractionDigits = 2
-        return formatter.number(from: self)?.doubleValue
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.numberStyle = .currency
+        currencyFormatter.currencySymbol = ""
+        currencyFormatter.maximumFractionDigits = 2
+        currencyFormatter.minimumFractionDigits = 2
+        currencyFormatter.locale = Locale(identifier: "pt_BR")
+        
+        if let doubleFormatted = currencyFormatter.number(from: self)?.doubleValue {
+            return doubleFormatted
+        } else {
+            return 0.00
+        }
+        
+    }
+    
+    func onlydigits() -> String {
+        return components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
     }
     
     func currencyInputFormatting() -> String {
-        
-        var number: NSNumber!
-        var amountWithPrefix = self
-        
-        // remove from String: "$", ".", ","
-        let regex = try! NSRegularExpression(pattern: "[^0-9]", options: .caseInsensitive)
-        amountWithPrefix = regex.stringByReplacingMatches(in: amountWithPrefix, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.count), withTemplate: "")
-        
-        let double = (amountWithPrefix as NSString).doubleValue
-        number = NSNumber(value: (double / 100))
-        
-        // if first number is 0 or all numbers were deleted
-        guard number != 0 as NSNumber else {
-            return ""
-        }
-        
+        let double = onlydigits().toDouble() ?? 0.00
+        let number = NSNumber(value: (double / 100))
         return number.doubleValue.decimalFormat()
     }
     

@@ -54,6 +54,7 @@
                                                             </button>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="0,00" placeholder="Select a currency" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6yi-8e-tXP">
                                                                 <rect key="frame" x="0.0" y="49.5" width="325" height="60"/>
+                                                                <color key="tintColor" red="0.83025696994999998" green="0.62119725671956905" blue="0.21204442230848183" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="60" id="tKR-d4-ad1"/>
                                                                 </constraints>
