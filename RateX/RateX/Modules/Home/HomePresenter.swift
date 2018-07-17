@@ -18,7 +18,7 @@ final class HomePresenter {
     private var _interactor: HomeInteractorInterface
     private var _wireframe: HomeWireframeInterface
     
-    private var _allCurrencies: [Currency] = Currency.allCases
+    private let _allCurrencies: [Currency] = Currency.allCases
     private var _selectedTopIndex: Int = -1
     private var _selectedBottomIndex: Int = -1
     private var _cache: [CurrencyRates] = []
@@ -36,17 +36,19 @@ final class HomePresenter {
 
 extension HomePresenter: HomePresenterInterface {
     
-    func loadCurrencyRates() {
-        if let currencyRate = _cache.filter({ $0.base == _allCurrencies[_selectedTopIndex] }).first {
-            _view.setDate(currencyRate.date)
-//            _view.setRate("\(currencyRate.rates[_allCurrencies[_selectedBottomIndex]] ?? 0)")
-        } else {
-            _loadRates()
-        }
-    }
-    
     func viewDidLoad() {
         _view.reloadDatas()
+    }
+    
+    func showCurrencyRatesInfo() {
+        if let currencyRate = _cache.filter({ $0.base == _allCurrencies[_selectedTopIndex] }).first {
+            _view.setDate("Last update: \(currencyRate.date)")
+            //Already selected
+            if _selectedBottomIndex > -1 {
+                let bottomCurrency = _allCurrencies[_selectedBottomIndex]
+                _view.setRate("\(currencyRate.base.symbol)1 = \(bottomCurrency.symbol)\(currencyRate.rates[bottomCurrency] ?? 0)")
+            }
+        }
     }
     
     func numberOfSections() -> Int {
@@ -62,21 +64,30 @@ extension HomePresenter: HomePresenterInterface {
     }
     
     func didSelectTopItem(at indexPath: IndexPath) {
+        _view.enableCurrencyButtonBottom()
         _selectedTopIndex = indexPath.row
         _view.showSelectedCurrency(_allCurrencies[_selectedTopIndex], location: .top)
         _view.showOrHideTableView(.top)
-        loadCurrencyRates()
+        if !_cache.contains(where: { $0.base == _allCurrencies[_selectedTopIndex] }) {
+            _loadRates()
+        } else {
+            showCurrencyRatesInfo()
+        }
     }
     
     func didSelectBottomItem(at indexPath: IndexPath) {
-        _selectedBottomIndex = indexPath.row
-        _view.showSelectedCurrency(_allCurrencies[_selectedBottomIndex], location: .bottom)
-        _view.showOrHideTableView(.bottom)
+        if indexPath.row == _selectedTopIndex {
+            _wireframe.showAlert(with: "Attention", message: "You must select a different currency.")
+        } else {
+            _selectedBottomIndex = indexPath.row
+            _view.showSelectedCurrency(_allCurrencies[_selectedBottomIndex], location: .bottom)
+            _view.showOrHideTableView(.bottom)
+            showCurrencyRatesInfo()
+        }
     }
     
     func didTouchButtonCurrency(_ location: LayoutLocation) {
         _view.showOrHideTableView(location)
-        
     }
     
 }

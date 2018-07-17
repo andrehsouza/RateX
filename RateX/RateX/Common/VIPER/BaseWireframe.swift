@@ -100,6 +100,7 @@ extension BaseWireframe: WireframeInterface {
     func showAlert(with title: String?, message: String?, actions: [UIAlertAction]) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         actions.forEach { alert.addAction($0) }
+        alert.view.tintColor = .mainColor
         navigationController?.present(alert, animated: true, completion: nil)
     }
 

@@ -16,7 +16,7 @@ final class HomeViewController: RBaseViewController {
     @IBOutlet weak var cardBottomView: RCardView!
     
     @IBOutlet weak var currencyButtonTop: RButton!
-    @IBOutlet weak var currencyButtonBottom: UIButton!
+    @IBOutlet weak var currencyButtonBottom: RButton!
     
     @IBOutlet weak var tableViewTop: UITableView!
     @IBOutlet var tableViewTopHeight: NSLayoutConstraint!
@@ -135,14 +135,6 @@ extension HomeViewController: HomeViewInterface {
         }
     }
     
-    func showCurrencyButtonTopLoading(_ loading: Bool) {
-        if loading {
-            currencyButtonTop.showLoading()
-        } else {
-            currencyButtonTop.hideLoading()
-        }
-    }
-    
     func showError(error: ErrorInterface, target: Any, action: Selector) {
         showFenceError(error: error, target: target, action: action)
     }
@@ -181,6 +173,10 @@ extension HomeViewController: HomeViewInterface {
     
     func setRate(_ rate: String) {
         rateLabel.text = rate
+    }
+    
+    func enableCurrencyButtonBottom() {
+        currencyButtonBottom.isEnabled = true
     }
     
 }

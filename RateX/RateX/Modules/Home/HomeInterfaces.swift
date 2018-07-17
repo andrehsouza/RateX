@@ -26,15 +26,15 @@ protocol HomeViewInterface: ViewInterface {
     func showSelectedCurrency(_ currency: CurrencyListItemInterface, location: LayoutLocation)
     func showOrHideTableView(_ location: LayoutLocation)
     func showLoading(_ loading: Bool)
-    func showCurrencyButtonTopLoading(_ loading: Bool)
     func showError(error: ErrorInterface, target: Any, action: Selector)
     func reloadDatas()
     func setDate(_ date: String)
     func setRate(_ rate: String)
+    func enableCurrencyButtonBottom()
 }
 
 protocol HomePresenterInterface: PresenterInterface {
-    func loadCurrencyRates()
+    func showCurrencyRatesInfo()
     func numberOfSections() -> Int
     func numberOfItems(in section: Int) -> Int
     func item(at indexPath: IndexPath) -> CurrencyListItemInterface?
