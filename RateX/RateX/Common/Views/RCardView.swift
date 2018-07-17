@@ -58,8 +58,8 @@ class RCardView: UIView {
         updateViewsFromIB()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         setupView()
     }
 }

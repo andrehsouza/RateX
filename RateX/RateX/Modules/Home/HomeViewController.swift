@@ -21,17 +21,17 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let currencyService = CurrencyRatesService()
-        currencyService.get(base: .USD, { response in
-            switch response {
-            case .success(let currencyrates):
-                debugPrint("SUCESSO")
-                break
-            case .failure(let error):
-                debugPrint("Erro! \(error)")
-                break
-            }
-        })
+//        let currencyService = CurrencyRatesService()
+//        currencyService.get(base: .USD, { response in
+//            switch response {
+//            case .success(let currencyrates):
+//                debugPrint("SUCESSO")
+//                break
+//            case .failure(let error):
+//                debugPrint("Erro! \(error)")
+//                break
+//            }
+//        })
         
     }
 	
