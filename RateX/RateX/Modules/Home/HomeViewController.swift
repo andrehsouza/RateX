@@ -11,7 +11,23 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
-
+    
+    @IBOutlet weak var cardTopView: RCardView!
+    @IBOutlet weak var cardBottomView: RCardView!
+    
+    @IBOutlet weak var currencyButtonTop: UIButton!
+    @IBOutlet weak var currencyButtonBottom: UIButton!
+    
+    @IBOutlet weak var tableViewTop: UITableView!
+    @IBOutlet var tableViewTopHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableViewBottom: UITableView!
+    @IBOutlet var tableViewBottomHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var textFieldTop: UITextField!
+    @IBOutlet weak var textFieldBottom: UITextField!
+    
+    @IBOutlet weak var rateLabel: UILabel!
+    
     // MARK: - Public properties -
 
     var presenter: HomePresenterInterface!
@@ -34,10 +50,106 @@ final class HomeViewController: UIViewController {
 //        })
         
     }
+    
+    @IBAction func touchDown(_ sender: UIButton) {
+        animTouch(sender, scaledDefault: false)
+    }
+    
+    @IBAction func buttonRelease(_ sender: UIButton) {
+        animTouch(sender, scaledDefault: true)
+    }
+    
+    @IBAction func touchCurrency(_ sender: UIButton) {
+        animTouch(sender, scaledDefault: true)
+        
+        UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0,
+                       options: [.curveEaseInOut], animations: {
+                        if sender == self.currencyButtonTop {
+                            self.tableViewTopHeight.constant = (self.tableViewTopHeight.constant > 0) ? 0 : 400
+                            self.tableViewBottomHeight.constant =  0
+                        } else {
+                            self.tableViewBottomHeight.constant = (self.tableViewBottomHeight.constant > 0) ? 0 : 400
+                            self.tableViewTopHeight.constant = 0
+                        }
+                        
+                        self.view.layoutIfNeeded()
+                        
+        }, completion: nil)
+        
+        
+    }
 	
+}
+
+// MARK: - Funcs -
+
+extension HomeViewController {
+    
+    private func setupTableViews() {
+        tableViewTop.register(CurrencyTableViewCell.self)
+        tableViewBottom.register(CurrencyTableViewCell.self)
+        tableViewTop.delegate = self
+        tableViewTop.dataSource = self
+        tableViewBottom.delegate = self
+        tableViewBottom.dataSource = self
+    }
+    
+    private func animTouch(_ sender: UIButton, scaledDefault: Bool) {
+        let carToAnim = (sender == currencyButtonTop) ? cardTopView : cardBottomView
+        carToAnim?.transform = scaledDefault ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.98, y: 0.98)
+    }
+    
+}
+
+// MARK: - UITableViewDataSource -
+
+extension HomeViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return presenter.numberOfSections()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == tableViewTop {
+            return presenter.numberOfItemsTop(in: section)
+        } else {
+            return presenter.numberOfItemsBottom(in: section)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as CurrencyTableViewCell
+//        cell.titleLabel. = presenter.itemTop(at: <#T##IndexPath#>)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
+    
+}
+
+// MARK: - UITableViewDelegate -
+
+extension HomeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if tableView == tableViewTop {
+            presenter.didSelectItemTop(at: indexPath)
+        } else {
+            presenter.didSelectItemBottom(at: indexPath)
+        }
+    }
+    
 }
 
 // MARK: - Extensions -
 
 extension HomeViewController: HomeViewInterface {
+    
+    
+    
+
+    
 }

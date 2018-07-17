@@ -75,3 +75,12 @@ enum Currency: String, Decodable {
     }
     
 }
+
+
+extension Currency: CurrencydListItemInterface {
+    
+    var title: String? {
+        return "\(self.name) (\(self.symbol))"
+    }
+    
+}

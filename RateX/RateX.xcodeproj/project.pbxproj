@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3064C9E120FD991C005A1CFE /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3064C9DF20FD991C005A1CFE /* CurrencyTableViewCell.swift */; };
+		3064C9E220FD991C005A1CFE /* CurrencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3064C9E020FD991C005A1CFE /* CurrencyTableViewCell.xib */; };
+		3064C9E520FDA4F6005A1CFE /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3064C9E320FDA4F5005A1CFE /* UITableViewCell+Extension.swift */; };
+		3064C9E620FDA4F6005A1CFE /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3064C9E420FDA4F5005A1CFE /* UITableView+Extension.swift */; };
 		30A12F3620FC2A1B00135A64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A12F3520FC2A1B00135A64 /* AppDelegate.swift */; };
 		30A12F3E20FC2A1B00135A64 /* RateX.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30A12F3C20FC2A1B00135A64 /* RateX.xcdatamodeld */; };
 		30A12F4020FC2A2200135A64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30A12F3F20FC2A2200135A64 /* Assets.xcassets */; };
@@ -70,6 +74,10 @@
 
 /* Begin PBXFileReference section */
 		046B342236B30113065B0DE5 /* Pods-RateX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RateX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RateX/Pods-RateX.debug.xcconfig"; sourceTree = "<group>"; };
+		3064C9DF20FD991C005A1CFE /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
+		3064C9E020FD991C005A1CFE /* CurrencyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyTableViewCell.xib; sourceTree = "<group>"; };
+		3064C9E320FDA4F5005A1CFE /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		3064C9E420FDA4F5005A1CFE /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		30A12F3220FC2A1B00135A64 /* RateX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RateX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A12F3520FC2A1B00135A64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30A12F3D20FC2A1B00135A64 /* RateX.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RateX.xcdatamodel; sourceTree = "<group>"; };
@@ -153,6 +161,15 @@
 				D8EC2FFFBFFAB6B159E7306D /* Pods_RateX.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3064C9DE20FD98CC005A1CFE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3064C9DF20FD991C005A1CFE /* CurrencyTableViewCell.swift */,
+				3064C9E020FD991C005A1CFE /* CurrencyTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		30A12F2920FC2A1A00135A64 = {
@@ -258,6 +275,8 @@
 				7B622C5D20FCDA1B006C0BBE /* UINavigationController+Extension.swift */,
 				7B622C5F20FCDA1B006C0BBE /* UIStoryboard+Extension.swift */,
 				7B622C6120FCDA1B006C0BBE /* Date+Extensions.swift */,
+				3064C9E420FDA4F5005A1CFE /* UITableView+Extension.swift */,
+				3064C9E320FDA4F5005A1CFE /* UITableViewCell+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -369,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				7BD6BBF220FD0C10003A393E /* Home.storyboard */,
+				3064C9DE20FD98CC005A1CFE /* Cells */,
 				7BD6BBF420FD0C31003A393E /* HomeInterfaces.swift */,
 				7BD6BBF520FD0C31003A393E /* HomePresenter.swift */,
 				7BD6BBF620FD0C31003A393E /* HomeViewController.swift */,
@@ -494,6 +514,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B622C9F20FCDA1C006C0BBE /* RFenceView.xib in Resources */,
+				3064C9E220FD991C005A1CFE /* CurrencyTableViewCell.xib in Resources */,
 				7B622CAE20FCDD37006C0BBE /* LaunchScreen.storyboard in Resources */,
 				30A12F4020FC2A2200135A64 /* Assets.xcassets in Resources */,
 				7BD6BBF320FD0C10003A393E /* Home.storyboard in Resources */,
@@ -578,14 +599,17 @@
 				7B622C9A20FCDA1C006C0BBE /* RButton.swift in Sources */,
 				7B622C8B20FCDA1C006C0BBE /* UIStoryboard+Extension.swift in Sources */,
 				30A12F3E20FC2A1B00135A64 /* RateX.xcdatamodeld in Sources */,
+				3064C9E120FD991C005A1CFE /* CurrencyTableViewCell.swift in Sources */,
 				7B622C5320FCD9B9006C0BBE /* Initializable.swift in Sources */,
 				7B622C8D20FCDA1C006C0BBE /* Date+Extensions.swift in Sources */,
 				7B622C9520FCDA1C006C0BBE /* ViewInterface.swift in Sources */,
 				7BD6BBFF20FD0E8C003A393E /* CurrencyRatesService.swift in Sources */,
+				3064C9E620FDA4F6005A1CFE /* UITableView+Extension.swift in Sources */,
 				7BD6BBFD20FD0C31003A393E /* HomeWireframe.swift in Sources */,
 				7B622C9220FCDA1C006C0BBE /* RequestResultType.swift in Sources */,
 				7BD6BBF020FD0A59003A393E /* CurrencyRates.swift in Sources */,
 				7B622C9D20FCDA1C006C0BBE /* RCardView.swift in Sources */,
+				3064C9E520FDA4F6005A1CFE /* UITableViewCell+Extension.swift in Sources */,
 				7BD6BBEE20FCF968003A393E /* Currency.swift in Sources */,
 				7B622C8620FCDA1C006C0BBE /* ReusableViewProtocol.swift in Sources */,
 				7B622C8420FCDA1C006C0BBE /* UrlUtil.swift in Sources */,
@@ -766,7 +790,10 @@
 				DEVELOPMENT_TEAM = 959WMEP4YD;
 				INFOPLIST_FILE = "$(SRCROOT)/RateX/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.andre.RateX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -783,7 +810,10 @@
 				DEVELOPMENT_TEAM = 959WMEP4YD;
 				INFOPLIST_FILE = "$(SRCROOT)/RateX/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.andre.RateX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -800,7 +830,11 @@
 				DEVELOPMENT_TEAM = 959WMEP4YD;
 				INFOPLIST_FILE = RateXTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.andre.RateXTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -818,7 +852,11 @@
 				DEVELOPMENT_TEAM = 959WMEP4YD;
 				INFOPLIST_FILE = RateXTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.andre.RateXTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -835,7 +873,11 @@
 				DEVELOPMENT_TEAM = 959WMEP4YD;
 				INFOPLIST_FILE = RateXUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.andre.RateXUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -852,7 +894,11 @@
 				DEVELOPMENT_TEAM = 959WMEP4YD;
 				INFOPLIST_FILE = RateXUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.andre.RateXUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

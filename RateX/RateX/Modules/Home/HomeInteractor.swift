@@ -12,10 +12,16 @@ import Foundation
 
 final class HomeInteractor {
     
+    fileprivate let currencyService = CurrencyRatesService()
+    
 }
 
 // MARK: - Extensions -
 
 extension HomeInteractor: HomeInteractorInterface {
+    
+    func getRelated(base: Currency, completion: @escaping (RequestResultType<CurrencyRates>) -> Void) {
+        currencyService.get(base: base, completion)
+    }
     
 }

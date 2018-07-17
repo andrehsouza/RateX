@@ -17,6 +17,9 @@ final class HomePresenter {
     private unowned var _view: HomeViewInterface
     private var _interactor: HomeInteractorInterface
     private var _wireframe: HomeWireframeInterface
+    
+    private var _topCurrencies: [Currency] = Currency.allCases
+    private var _bottomCurrencies: [Currency] = [:]
 
     // MARK: - Lifecycle -
 
@@ -30,4 +33,6 @@ final class HomePresenter {
 // MARK: - Extensions -
 
 extension HomePresenter: HomePresenterInterface {
+    
+    
 }

@@ -10,6 +10,11 @@
 
 import UIKit
 
+enum itemLocation {
+    case top
+    case bottom
+}
+
 enum HomeNavigationOption {
 }
 
@@ -21,7 +26,16 @@ protocol HomeViewInterface: ViewInterface {
 }
 
 protocol HomePresenterInterface: PresenterInterface {
+    func numberOfSections() -> Int
+    func numberOfItems(in section: Int, in: itemLocation) -> Int
+    func item(at indexPath: IndexPath, in: itemLocation) -> CurrencydListItemInterface?
+    func didSelectItem(at indexPath: IndexPath, in: itemLocation)
 }
 
 protocol HomeInteractorInterface: InteractorInterface {
+    
+}
+
+protocol CurrencydListItemInterface {
+    var title: String? { get }
 }
