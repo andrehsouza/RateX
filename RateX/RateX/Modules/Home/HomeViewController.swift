@@ -29,6 +29,8 @@ final class HomeViewController: RBaseViewController {
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var updateLabel: UILabel!
     
+    private var arrowTransformClosed = CGAffineTransform(rotationAngle: (180.0 * .pi) / 180.0)
+    
     // MARK: - Public properties -
 
     var presenter: HomePresenterInterface!
@@ -189,11 +191,17 @@ extension HomeViewController: HomeViewInterface {
         
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: [.curveEaseInOut], animations: {
             if location == .top {
-                self.tableViewTopHeight.constant = (self.tableViewTopHeight.constant > 0) ? 0 : 440
+                let isOpened = (self.tableViewTopHeight.constant > 0)
+                self.currencyButtonTop.imageView?.transform = isOpened ? CGAffineTransform.identity : self.arrowTransformClosed
+                self.tableViewTopHeight.constant = isOpened ? 0 : 440
                 self.tableViewBottomHeight.constant =  0
+                self.currencyButtonBottom.imageView?.transform = CGAffineTransform.identity
             } else {
-                self.tableViewBottomHeight.constant = (self.tableViewBottomHeight.constant > 0) ? 0 : 440
+                let isOpened = (self.tableViewBottomHeight.constant > 0)
+                self.currencyButtonBottom.imageView?.transform = isOpened ? CGAffineTransform.identity : self.arrowTransformClosed
+                self.tableViewBottomHeight.constant = isOpened ? 0 : 440
                 self.tableViewTopHeight.constant = 0
+                self.currencyButtonTop.imageView?.transform = CGAffineTransform.identity
             }
             self.view.layoutIfNeeded()
             

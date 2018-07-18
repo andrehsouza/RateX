@@ -79,6 +79,7 @@ extension HomePresenter: HomePresenterInterface {
             _selectedBottomIndex = -1
             clearInfo()
         }
+        
         _view.enableCurrencyButtonBottom(true)
         _selectedTopIndex = indexPath.row
         _view.showSelectedCurrency(_allCurrencies[_selectedTopIndex], location: .top)

@@ -58,10 +58,16 @@ class RCardView: UIView {
         updateViewsFromIB()
     }
     
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
+    override func awakeFromNib() {
+        super.awakeFromNib()
         setupView()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+    }
+    
 }
 
 extension RCardView: BaseViewProtocol {
@@ -71,18 +77,15 @@ extension RCardView: BaseViewProtocol {
         if radiusOnlyBottom {
            layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         }
-//        layer.masksToBounds = true
+        
         layer.borderColor = borderColor?.cgColor
         layer.borderWidth = borderWidth
         layer.backgroundColor = layerBackgroundColor?.cgColor
         //Shadow
-        let shadowPath = UIBezierPath(rect: bounds).cgPath
         layer.shadowColor = shadowColor?.cgColor
         layer.shadowOpacity = shadowOpacity
         layer.shadowOffset = CGSize.zero
         layer.shadowRadius = cornerRadius
-        layer.shadowPath = shadowPath
-        layer.shouldRasterize = true
     }
     
 }
