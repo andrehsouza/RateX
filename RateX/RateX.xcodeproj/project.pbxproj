@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		302432CF20FEB4B40062B731 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302432CE20FEB4B40062B731 /* CoreDataStack.swift */; };
+		302432D120FEB5160062B731 /* NSManagedObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302432D020FEB5160062B731 /* NSManagedObject+Extension.swift */; };
+		302432D320FEBB650062B731 /* CacheCurrencyRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302432D220FEBB650062B731 /* CacheCurrencyRates.swift */; };
 		3064C9E120FD991C005A1CFE /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3064C9DF20FD991C005A1CFE /* CurrencyTableViewCell.swift */; };
 		3064C9E220FD991C005A1CFE /* CurrencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3064C9E020FD991C005A1CFE /* CurrencyTableViewCell.xib */; };
 		3064C9E520FDA4F6005A1CFE /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3064C9E320FDA4F5005A1CFE /* UITableViewCell+Extension.swift */; };
@@ -77,6 +80,9 @@
 
 /* Begin PBXFileReference section */
 		046B342236B30113065B0DE5 /* Pods-RateX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RateX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RateX/Pods-RateX.debug.xcconfig"; sourceTree = "<group>"; };
+		302432CE20FEB4B40062B731 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		302432D020FEB5160062B731 /* NSManagedObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extension.swift"; sourceTree = "<group>"; };
+		302432D220FEBB650062B731 /* CacheCurrencyRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCurrencyRates.swift; sourceTree = "<group>"; };
 		3064C9DF20FD991C005A1CFE /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		3064C9E020FD991C005A1CFE /* CurrencyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyTableViewCell.xib; sourceTree = "<group>"; };
 		3064C9E320FDA4F5005A1CFE /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
@@ -169,6 +175,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		302432CD20FEB49E0062B731 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				302432CE20FEB4B40062B731 /* CoreDataStack.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		3064C9DE20FD98CC005A1CFE /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +265,7 @@
 		7B622C5520FCDA1B006C0BBE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				302432CD20FEB49E0062B731 /* CoreData */,
 				7B622C5620FCDA1B006C0BBE /* Util */,
 				7B622C5820FCDA1B006C0BBE /* Extensions */,
 				7B622C6420FCDA1B006C0BBE /* Model */,
@@ -274,6 +289,7 @@
 		7B622C5820FCDA1B006C0BBE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				302432D020FEB5160062B731 /* NSManagedObject+Extension.swift */,
 				7B622C5920FCDA1B006C0BBE /* UIColor+Extension.swift */,
 				7B622C5A20FCDA1B006C0BBE /* ReusableViewProtocol.swift */,
 				7B622C5B20FCDA1B006C0BBE /* NSObject+Extension.swift */,
@@ -363,6 +379,7 @@
 			children = (
 				7BD6BBED20FCF968003A393E /* Currency.swift */,
 				7BD6BBEF20FD0A59003A393E /* CurrencyRates.swift */,
+				302432D220FEBB650062B731 /* CacheCurrencyRates.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -599,6 +616,7 @@
 				7B622C9420FCDA1C006C0BBE /* PresenterInterface.swift in Sources */,
 				7B622CA220FCDA1C006C0BBE /* RNavigationController.swift in Sources */,
 				7B622C9020FCDA1C006C0BBE /* ResponseType.swift in Sources */,
+				302432D320FEBB650062B731 /* CacheCurrencyRates.swift in Sources */,
 				7BD6BBF920FD0C31003A393E /* HomeInterfaces.swift in Sources */,
 				7B622C8920FCDA1C006C0BBE /* UINavigationController+Extension.swift in Sources */,
 				7B622C8720FCDA1C006C0BBE /* NSObject+Extension.swift in Sources */,
@@ -613,6 +631,7 @@
 				7B622C8D20FCDA1C006C0BBE /* Date+Extensions.swift in Sources */,
 				7B53A7A320FE599700EF1D9D /* String+Extension.swift in Sources */,
 				7B622C9520FCDA1C006C0BBE /* ViewInterface.swift in Sources */,
+				302432CF20FEB4B40062B731 /* CoreDataStack.swift in Sources */,
 				7BD6BBFF20FD0E8C003A393E /* CurrencyRatesService.swift in Sources */,
 				3064C9E620FDA4F6005A1CFE /* UITableView+Extension.swift in Sources */,
 				7BD6BBFD20FD0C31003A393E /* HomeWireframe.swift in Sources */,
@@ -626,6 +645,7 @@
 				7B622C8420FCDA1C006C0BBE /* RUtil.swift in Sources */,
 				7B622C9E20FCDA1C006C0BBE /* BaseViewProtocol.swift in Sources */,
 				7B622C8820FCDA1C006C0BBE /* UIView+Extension.swift in Sources */,
+				302432D120FEB5160062B731 /* NSManagedObject+Extension.swift in Sources */,
 				7B622C9B20FCDA1C006C0BBE /* RImageView.swift in Sources */,
 				7BD6BBFB20FD0C31003A393E /* HomeViewController.swift in Sources */,
 				7B622C9120FCDA1C006C0BBE /* ErrorResponse.swift in Sources */,

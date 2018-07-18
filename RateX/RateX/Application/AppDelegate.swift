@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        //TODO
+        CoreDataStack.sharedInstance.saveContext()
     }
 
 

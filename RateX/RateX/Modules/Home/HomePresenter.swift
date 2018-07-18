@@ -21,7 +21,8 @@ final class HomePresenter {
     private let _allCurrencies: [Currency] = Currency.allCases
     private var _selectedTopIndex: Int = -1
     private var _selectedBottomIndex: Int = -1
-    private var _cache: [CurrencyRates] = []
+//    private var _cache: [CurrencyRates] = []
+    private var _cache = [CacheCurrencyRates]()
 
     // MARK: - Lifecycle -
 
@@ -46,7 +47,7 @@ extension HomePresenter: HomePresenterInterface {
             //Already selected
             if _selectedBottomIndex > -1 {
                 let bottomCurrency = _allCurrencies[_selectedBottomIndex]
-                _view.rate = "\(currencyRate.base.symbol) 1 = \(bottomCurrency.symbol) \(currencyRate.rates[bottomCurrency] ?? 0)"
+//                _view.rate = "\(currencyRate.base.symbol) 1 = \(bottomCurrency.symbol) \(currencyRate.rates[bottomCurrency] ?? 0)"
             }
             convertValue()
         }
@@ -123,12 +124,14 @@ extension HomePresenter {
         
         guard
             let topCurrency = _allCurrencies[safe: _selectedTopIndex],
-            let bottomCurrency = _allCurrencies[safe: _selectedBottomIndex],
-            let currencyRate = _cache.filter({ $0.base == topCurrency }).first?.rates[bottomCurrency],
+//            let bottomCurrency = _allCurrencies[safe: _selectedBottomIndex],
+            let currencyCacheRates = _cache.filter({ $0.name == topCurrency.name }).first?.rates.sorted(by: { $0.name < $1.name }),
+            //let currencyRate = _cache.filter({ $0.base == topCurrency }).first?.rates[bottomCurrency],
             let valueToConvertString = _view.topTextFieldText,
             let valueToConvertDouble = valueToConvertString.toDouble()
         else { return }
         
+        let currencyRate = currencyCacheRates[_selectedBottomIndex].value.doubleValue
         let valueConverted = currencyRate * valueToConvertDouble
         _view.bottomTextFieldText = "\(valueConverted.decimalFormat())"
     }
@@ -145,8 +148,13 @@ extension HomePresenter {
         case .success(let currencyRates):
             _view.showLoading(false)
             _view.reloadDatas()
-            _cache.append(currencyRates)
+//            _cache.append(currencyRates)
             showCurrencyRatesInfo()
+            
+            //Insert
+            let _ = CacheCurrencyRates(currencyRates)
+            _cache = CacheCurrencyRates.fetchAll()
+
             break
         case .failure(let errorResponse):
             _view.showError(error: errorResponse, target: self, action: #selector(self._loadRates))
