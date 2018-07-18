@@ -58,6 +58,11 @@ final class HomeViewController: RBaseViewController {
     @IBAction func editingChanged(_ sender: Any) {
         presenter.editingChanged(textFieldTop.text)
     }
+    
+    @IBAction func touchRefresh(_ sender: Any) {
+        presenter.didPressRefresh()
+    }
+    
 	
 }
 
@@ -200,8 +205,13 @@ extension HomeViewController: HomeViewInterface {
         tableViewBottom.reloadData()
     }
     
-    func enableCurrencyButtonBottom() {
-        currencyButtonBottom.isEnabled = true
+    func enableCurrencyButtonBottom(_ enabled: Bool) {
+        currencyButtonBottom.isEnabled = enabled
+    }
+    
+    func clearSelecionsTitle() {
+        currencyButtonTop.setTitle("Select a currency", for: .normal)
+        currencyButtonBottom.setTitle("Select a currency", for: .normal)
     }
     
 }

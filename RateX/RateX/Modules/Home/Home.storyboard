@@ -238,6 +238,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="23K-QS-v5A"/>
                     </view>
+                    <navigationItem key="navigationItem" title="RateX" largeTitleDisplayMode="never" id="Nb6-cF-0Ml">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="ZJE-aZ-uJj">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="touchRefresh:" destination="Fu5-iq-X1C" id="3Cy-Rb-eg2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="cardBottomView" destination="vCb-Wk-P9j" id="NhW-jS-XBZ"/>
                         <outlet property="cardTopView" destination="FTV-hs-eDd" id="l0k-ml-nI1"/>

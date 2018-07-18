@@ -44,4 +44,18 @@ extension CoreDataStack {
             }
         }
     }
+    
+    func clearDatabase(entity: String) {
+        let context = persistentContainer.viewContext
+        let coord = context.persistentStoreCoordinator
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity )
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try coord?.execute(deleteRequest, with: context)
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+    }
 }

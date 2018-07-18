@@ -36,6 +36,15 @@ final class HomePresenter {
 
 extension HomePresenter: HomePresenterInterface {
     
+    func didPressRefresh() {
+        _view.showLoading(true)
+        CacheCurrency.deleteAll()
+        CacheRates.deleteAll()
+        CoreDataStack.sharedInstance.saveContext()
+        clearInfo()
+        clearSelecions()
+    }
+    
     func viewDidLoad() {
         _view.reloadDatas()
     }
@@ -47,7 +56,7 @@ extension HomePresenter: HomePresenterInterface {
             if _selectedBottomIndex > -1 {
                 let bottomCurrency = _allCurrencies[_selectedBottomIndex]
                 let rate = currencyRate.ratesSorted.filter(with: bottomCurrency)
-                _view.rate = "\(currencyRate.base.symbol) 1 = \(bottomCurrency.symbol) \(rate?.value ?? 0)"
+                _view.rate = "\(currencyRate.base.symbol) 1 = \(bottomCurrency.symbol) \(rate?.value.decimalFormat() ?? "")"
             }
             convertValue()
         }
@@ -70,7 +79,7 @@ extension HomePresenter: HomePresenterInterface {
             _selectedBottomIndex = -1
             clearInfo()
         }
-        _view.enableCurrencyButtonBottom()
+        _view.enableCurrencyButtonBottom(true)
         _selectedTopIndex = indexPath.row
         _view.showSelectedCurrency(_allCurrencies[_selectedTopIndex], location: .top)
         _view.showOrHideTableView(.top)
@@ -138,6 +147,16 @@ extension HomePresenter {
         _view.bottomTextFieldText = "0,00"
         _view.date = ""
         _view.rate = ""
+    }
+    
+    private func clearSelecions() {
+        _view.enableCurrencyButtonBottom(false)
+        _view.topTextFieldText = "0,00"
+        _selectedTopIndex = -1
+        _selectedBottomIndex = -1
+        _cache = CacheCurrency.fetchAll()
+        _view.clearSelecionsTitle()
+        _view.showLoading(false)
     }
     
     private func convertValue() {

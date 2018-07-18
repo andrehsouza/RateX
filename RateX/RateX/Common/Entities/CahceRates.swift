@@ -36,5 +36,9 @@ extension CacheRates {
         self.init(context: CoreDataStack.sharedInstance.persistentContainer.viewContext)
     }
     
+    static func deleteAll() {
+        CoreDataStack.sharedInstance.clearDatabase(entity: identifier)
+    }
+    
 }
 
