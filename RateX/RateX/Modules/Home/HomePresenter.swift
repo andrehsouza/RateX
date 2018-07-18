@@ -21,8 +21,7 @@ final class HomePresenter {
     private let _allCurrencies: [Currency] = Currency.allCases
     private var _selectedTopIndex: Int = -1
     private var _selectedBottomIndex: Int = -1
-//    private var _cache: [CurrencyRates] = []
-    private var _cache = [CacheCurrencyRates]()
+    private var _cache = CacheCurrency.fetchAll()
 
     // MARK: - Lifecycle -
 
@@ -42,12 +41,13 @@ extension HomePresenter: HomePresenterInterface {
     }
     
     func showCurrencyRatesInfo() {
-        if let currencyRate = _cache.filter({ $0.base == _allCurrencies[_selectedTopIndex] }).first {
-            _view.date = "Last update: \(currencyRate.date)"
+        if let currencyRate = _cache.filter(with: _allCurrencies[_selectedTopIndex]) {
+            _view.date = "Last update: \(currencyRate.date.stringFormat())"
             //Already selected
             if _selectedBottomIndex > -1 {
                 let bottomCurrency = _allCurrencies[_selectedBottomIndex]
-//                _view.rate = "\(currencyRate.base.symbol) 1 = \(bottomCurrency.symbol) \(currencyRate.rates[bottomCurrency] ?? 0)"
+                let rate = currencyRate.ratesSorted.filter(with: bottomCurrency)
+                _view.rate = "\(currencyRate.base.symbol) 1 = \(bottomCurrency.symbol) \(rate?.value ?? 0)"
             }
             convertValue()
         }
@@ -74,10 +74,15 @@ extension HomePresenter: HomePresenterInterface {
         _selectedTopIndex = indexPath.row
         _view.showSelectedCurrency(_allCurrencies[_selectedTopIndex], location: .top)
         _view.showOrHideTableView(.top)
-        if !_cache.contains(where: { $0.base == _allCurrencies[_selectedTopIndex] }) {
-            _loadRates()
+        
+        if let cache = _cache.filter(with: _allCurrencies[_selectedTopIndex]) {
+            if cache.date.isOutOfDate() {
+                _loadRates()
+            } else {
+                showCurrencyRatesInfo()
+            }
         } else {
-            showCurrencyRatesInfo()
+            _loadRates()
         }
     }
     
@@ -114,6 +119,21 @@ extension HomePresenter: HomePresenterInterface {
 
 extension HomePresenter {
     
+    private func insertCache(_ currencyRates: CurrencyRates) {
+        let currencyCache = CacheCurrency()
+        currencyCache.name = currencyRates.base.rawValue
+        currencyCache.rates.removeAll()
+        currencyRates.rates.forEach() { currency in
+            let cacheRate = CacheRates()
+            cacheRate.name = currency.key.rawValue
+            cacheRate.value = currency.value
+            currencyCache.rates.insert(cacheRate)
+        }
+        
+        CoreDataStack.sharedInstance.saveContext()
+        _cache = CacheCurrency.fetchAll()
+    }
+    
     private func clearInfo() {
         _view.bottomTextFieldText = "0,00"
         _view.date = ""
@@ -124,15 +144,13 @@ extension HomePresenter {
         
         guard
             let topCurrency = _allCurrencies[safe: _selectedTopIndex],
-//            let bottomCurrency = _allCurrencies[safe: _selectedBottomIndex],
-            let currencyCacheRates = _cache.filter({ $0.name == topCurrency.name }).first?.rates.sorted(by: { $0.name < $1.name }),
-            //let currencyRate = _cache.filter({ $0.base == topCurrency }).first?.rates[bottomCurrency],
+            let bottomCurrency = _allCurrencies[safe: _selectedBottomIndex],
+            let currencyCacheRate = _cache.filter(with: topCurrency)?.ratesSorted.filter(with: bottomCurrency),
             let valueToConvertString = _view.topTextFieldText,
             let valueToConvertDouble = valueToConvertString.toDouble()
         else { return }
         
-        let currencyRate = currencyCacheRates[_selectedBottomIndex].value.doubleValue
-        let valueConverted = currencyRate * valueToConvertDouble
+        let valueConverted = currencyCacheRate.value * valueToConvertDouble
         _view.bottomTextFieldText = "\(valueConverted.decimalFormat())"
     }
     
@@ -148,13 +166,8 @@ extension HomePresenter {
         case .success(let currencyRates):
             _view.showLoading(false)
             _view.reloadDatas()
-//            _cache.append(currencyRates)
+            insertCache(currencyRates)
             showCurrencyRatesInfo()
-            
-            //Insert
-            let _ = CacheCurrencyRates(currencyRates)
-            _cache = CacheCurrencyRates.fetchAll()
-
             break
         case .failure(let errorResponse):
             _view.showError(error: errorResponse, target: self, action: #selector(self._loadRates))

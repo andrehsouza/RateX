@@ -15,3 +15,19 @@ extension Array {
     }
     
 }
+
+extension Array where Element: CacheCurrency {
+    
+    func filter(with currency: Currency) -> CacheCurrency? {
+        return filter({ $0.base == currency }).first
+    }
+    
+}
+
+extension Array where Element: CacheRates {
+    
+    func filter(with currency: Currency) -> CacheRates? {
+        return filter({ $0.base == currency }).first
+    }
+    
+}
