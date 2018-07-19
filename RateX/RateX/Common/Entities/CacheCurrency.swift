@@ -47,8 +47,8 @@ extension CacheCurrency {
         date = Date()
     }
     
-    static func deleteAll() {
-        CoreDataStack.sharedInstance.clearDatabase(entity: identifier)
+    public override func prepareForDeletion() {
+        rates.forEach({ $0.delete() })
     }
     
 }

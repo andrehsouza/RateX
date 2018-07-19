@@ -26,5 +26,24 @@ extension FetchableProtocol where Self : NSManagedObject, FetchableType == Self 
 
         return []
     }
+    
+    static func deleteAll() {
+        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        let coord = context.persistentStoreCoordinator
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: identifier )
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try coord?.execute(deleteRequest, with: context)
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+    }
+    
+    func delete() {
+        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        context.delete(self)
+    }
+    
 }
 

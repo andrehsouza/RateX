@@ -19,7 +19,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="3lj-bp-o9h">
-                                <rect key="frame" x="135" y="291" width="105" height="105"/>
+                                <rect key="frame" x="87.5" y="243.5" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="C6T-og-RHH"/>
+                                    <constraint firstAttribute="width" constant="200" id="nKo-4a-QqV"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.72156862749999995" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

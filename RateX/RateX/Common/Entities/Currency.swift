@@ -11,7 +11,7 @@ import Foundation
 enum Currency: String, Decodable, Hashable {
     
     //Before swift 4.2, otherwise: CaseIterable
-    static let allCases = [USD, GBP, EUR, JPY, CHF, AUD, CAD, SGD, BRL, PLN].sorted(by:{ $0.name < $1.name})
+    static let allCases = [USD, GBP, EUR, JPY, CHF, AUD, CAD, SGD, BRL, PLN].sorted(by:{ $0.name < $1.name })
     
     case USD
     case GBP

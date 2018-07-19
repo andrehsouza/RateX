@@ -87,6 +87,7 @@ extension HomePresenter: HomePresenterInterface {
         
         if let cache = _cache.filter(with: _allCurrencies[_selectedTopIndex]) {
             if cache.date.isOutOfDate() {
+                cache.delete()
                 _loadRates()
             } else {
                 showCurrencyRatesInfo()
@@ -185,7 +186,6 @@ extension HomePresenter {
         switch result {
         case .success(let currencyRates):
             _view.showLoading(false)
-            _view.reloadDatas()
             insertCache(currencyRates)
             showCurrencyRatesInfo()
             break
