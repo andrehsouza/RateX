@@ -1,15 +1,17 @@
 //
-//  RateXTests.swift
+//  HomeTests.swift
 //  RateXTests
 //
-//  Created by Andre on 15/07/2018.
+//  Created by Andre on 29/07/2018.
 //  Copyright © 2018 Andre. All rights reserved.
 //
 
 import XCTest
 @testable import RateX
 
-class RateXTests: XCTestCase {
+class HomeTests: XCTestCase {
+    
+    let homeViewController = HomeViewController()
     
     override func setUp() {
         super.setUp()
@@ -21,16 +23,14 @@ class RateXTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_numberOfItemsShouldBeGreaterThanZero() {
+        let count = homeViewController.presenter.numberOfItems(in: 0)
+        XCTAssertGreaterThan(count, 0)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_requestCurrencyRatesSuccess() {
+        let row = Currency.allCases.index(of: .USD)
+        XCTAssertNotNil(row)
     }
     
 }

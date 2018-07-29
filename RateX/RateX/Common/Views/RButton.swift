@@ -92,7 +92,7 @@ extension RButton: BaseViewProtocol {
         let shadowPath = UIBezierPath(rect: bounds).cgPath
         layer.shadowColor = shadowColor?.cgColor
         layer.shadowOpacity = shadowOpacity
-        layer.shadowOffset = CGSize(width: -1, height: 1)
+        layer.shadowOffset = CGSize.zero
         layer.shadowRadius = cornerRadius
         layer.shadowPath = shadowPath
         layer.shouldRasterize = true

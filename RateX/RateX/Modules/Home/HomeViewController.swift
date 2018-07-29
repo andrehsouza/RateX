@@ -52,7 +52,7 @@ final class HomeViewController: RBaseViewController {
     }
     
     @IBAction func touchCurrency(_ sender: UIButton) {
-        animTouch(sender, scaledDefault: true)
+        animClick(sender)
         let location: LayoutLocation = (sender == currencyButtonTop) ? .top : .bottom
         presenter.didTouchButtonCurrency(location)
     }
@@ -82,8 +82,18 @@ extension HomeViewController {
     }
     
     private func animTouch(_ sender: UIButton, scaledDefault: Bool) {
-        let carToAnim = (sender == currencyButtonTop) ? cardTopView : cardBottomView
-        carToAnim?.transform = scaledDefault ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.98, y: 0.98)
+        let cardToAnim = (sender == currencyButtonTop) ? cardTopView : cardBottomView
+        cardToAnim?.transform = scaledDefault ? CGAffineTransform.identity : CGAffineTransform(scaleX: 0.96, y: 0.96)
+    }
+    
+    private func animClick(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.6, animations: {
+            self.animTouch(sender, scaledDefault: false)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.6) {
+                self.animTouch(sender, scaledDefault: true)
+            }
+        })
     }
     
 }
