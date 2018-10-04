@@ -1,6 +1,6 @@
 # RateX - Currency converter
 
-A challenge that consists of build an app about currency converter.
+A challenge that consists of building an app about currency converter.
 
 ## Using
 
